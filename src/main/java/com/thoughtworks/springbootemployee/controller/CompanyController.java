@@ -47,6 +47,8 @@ public class CompanyController {
 
     @GetMapping("/{companyId}/employees")
     public List<Employee> getEmployees(@PathVariable Integer companyId) {
+        System.out.println("###################");
+        System.out.println(companyId);
         return companyService.getEmployees(companyId);
     }
 

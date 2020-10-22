@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
-public class EmployeeRepository {
+public class EmployeeRepositoryLegacy {
     private final List<Employee> employees = new ArrayList<>();
 
     public List<Employee> findAllByGender(String gender) {
@@ -20,9 +20,10 @@ public class EmployeeRepository {
     }
 
     public List<Employee> findAllByCompanyId(Integer companyId) {
-        return employees.stream()
-            .filter(employee -> employee.getCompanyId().equals(companyId))
-            .collect(Collectors.toList());
+        return null;
+//        return employees.stream()
+//            .filter(employee -> employee.getCompanyId().equals(companyId))
+//            .collect(Collectors.toList());
     }
 
     public List<Employee> findAll() {

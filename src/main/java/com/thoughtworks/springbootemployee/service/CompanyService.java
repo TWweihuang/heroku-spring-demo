@@ -3,8 +3,8 @@ package com.thoughtworks.springbootemployee.service;
 import com.thoughtworks.springbootemployee.exception.CompanyNotFoundException;
 import com.thoughtworks.springbootemployee.model.Company;
 import com.thoughtworks.springbootemployee.model.Employee;
-import com.thoughtworks.springbootemployee.repository.CompanyRepository;
-import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
+import com.thoughtworks.springbootemployee.repository.CompanyRepositoryLegacy;
+import com.thoughtworks.springbootemployee.repository.EmployeeRepositoryLegacy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -14,11 +14,11 @@ import java.util.Optional;
 
 @Service
 public class CompanyService {
-    private final CompanyRepository companyRepository;
-    private final EmployeeRepository employeeRepository;
+    private final CompanyRepositoryLegacy companyRepository;
+    private final EmployeeRepositoryLegacy employeeRepository;
 
-    public CompanyService(CompanyRepository companyRepository,
-                          EmployeeRepository employeeRepository) {
+    public CompanyService(CompanyRepositoryLegacy companyRepository,
+                          EmployeeRepositoryLegacy employeeRepository) {
         this.companyRepository = companyRepository;
         this.employeeRepository = employeeRepository;
     }
@@ -50,15 +50,14 @@ public class CompanyService {
             if (updatingCompany.getCompanyName() != null) {
                 company.setCompanyName(updatingCompany.getCompanyName());
             }
-            if (updatingCompany.getEmployeeNumber() != null) {
-                company.setEmployeeNumber(updatingCompany.getEmployeeNumber());
-            }
             return company;
         }
         throw new CompanyNotFoundException("Company Id Not Found.");
     }
 
     public List<Employee> getEmployees(Integer companyId) {
-        return employeeRepository.findAllByCompanyId(companyId);
+        return companyRepository
+                .findById(companyId)
+                .map(Company::getEmployees).orElse(null);
     }
 }

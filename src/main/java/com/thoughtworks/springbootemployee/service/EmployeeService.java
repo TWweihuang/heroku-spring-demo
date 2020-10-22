@@ -3,6 +3,7 @@ package com.thoughtworks.springbootemployee.service;
 import com.thoughtworks.springbootemployee.exception.EmployeeNotFoundException;
 import com.thoughtworks.springbootemployee.model.Employee;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
+import com.thoughtworks.springbootemployee.repository.EmployeeRepositoryLegacy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -57,6 +58,9 @@ public class EmployeeService {
     }
 
     public List<Employee> getByGender(String gender) {
-        return employeeRepository.findAllByGender(gender);
+        return null;
+//        return employeeRepository.retrieveEmployeesFromGender(gender);
+//        return null;
+//        return employeeRepository.findAllByGender(gender);
     }
 }
