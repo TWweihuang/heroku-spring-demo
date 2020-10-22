@@ -6,6 +6,7 @@ import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepositoryLegacy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -58,8 +59,10 @@ public class EmployeeService {
     }
 
     public List<Employee> getByGender(String gender) {
-        return null;
-//        return employeeRepository.retrieveEmployeesFromGender(gender);
+        Pageable pageable = PageRequest.of(0, 2);
+        employeeRepository.findAll(pageable);
+
+        return employeeRepository.findByGender(gender);
 //        return null;
 //        return employeeRepository.findAllByGender(gender);
     }

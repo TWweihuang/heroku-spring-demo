@@ -3,6 +3,7 @@ package com.thoughtworks.springbootemployee.service;
 import com.thoughtworks.springbootemployee.exception.CompanyNotFoundException;
 import com.thoughtworks.springbootemployee.model.Company;
 import com.thoughtworks.springbootemployee.model.Employee;
+import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.repository.CompanyRepositoryLegacy;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepositoryLegacy;
 import org.springframework.data.domain.Page;
@@ -14,13 +15,11 @@ import java.util.Optional;
 
 @Service
 public class CompanyService {
-    private final CompanyRepositoryLegacy companyRepository;
-    private final EmployeeRepositoryLegacy employeeRepository;
+    private final CompanyRepository companyRepository;
 
-    public CompanyService(CompanyRepositoryLegacy companyRepository,
+    public CompanyService(CompanyRepository companyRepository,
                           EmployeeRepositoryLegacy employeeRepository) {
         this.companyRepository = companyRepository;
-        this.employeeRepository = employeeRepository;
     }
 
     public List<Company> getAll() {

@@ -1,5 +1,6 @@
 package com.thoughtworks.springbootemployee.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,7 +17,9 @@ public class Company {
     private Integer id;
     private String companyName;
     @OneToMany(
-            fetch = FetchType.LAZY
+            fetch = FetchType.EAGER,
+            orphanRemoval = true,
+            cascade = CascadeType.MERGE
     )
     @JoinColumn(name = "company_id")
     private List<Employee> employees;
