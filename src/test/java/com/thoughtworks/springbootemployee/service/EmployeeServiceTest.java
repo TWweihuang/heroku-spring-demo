@@ -1,6 +1,8 @@
 package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.model.Employee;
+import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
+import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -14,7 +16,6 @@ import java.util.Optional;
 import static java.util.Arrays.asList;
 
 class EmployeeServiceTest {
-
     @Test
     void should_get_all_employees_when_get_all_given_no_parameters() {
         EmployeeRepository repository = Mockito.mock(EmployeeRepository.class);
@@ -103,7 +104,7 @@ class EmployeeServiceTest {
         EmployeeRepository repository = Mockito.mock(EmployeeRepository.class);
         EmployeeService service = new EmployeeService(repository);
 
-        Mockito.when(repository.findAllByGender("Male")).thenReturn(asList(new Employee(), new Employee()));
+        Mockito.when(repository.findByGender("Male")).thenReturn(asList(new Employee(), new Employee()));
 
         List<Employee> responses = service.getByGender("Male");
 

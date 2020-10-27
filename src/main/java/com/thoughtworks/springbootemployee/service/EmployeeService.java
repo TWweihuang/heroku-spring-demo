@@ -3,7 +3,6 @@ package com.thoughtworks.springbootemployee.service;
 import com.thoughtworks.springbootemployee.exception.EmployeeNotFoundException;
 import com.thoughtworks.springbootemployee.model.Employee;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
-import com.thoughtworks.springbootemployee.repository.EmployeeRepositoryLegacy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +13,7 @@ import java.util.Optional;
 
 @Service
 public class EmployeeService {
+    public static final String EMPLOYEE_NOT_FOUND = "Employee Not Found.";
     private final EmployeeRepository employeeRepository;
 
     public EmployeeService(EmployeeRepository employeeRepository) {
@@ -37,33 +37,19 @@ public class EmployeeService {
     }
 
     public void delete(Integer employeeId) {
-        Optional<Employee> employee = employeeRepository.findById(employeeId);
-        employee.ifPresent(employeeRepository::delete);
+        employeeRepository.deleteById(employeeId);
     }
 
     public Employee update(Integer employeeId, Employee updatingEmployee) {
-        Employee employee = employeeRepository.findById(employeeId).orElse(null);
-        if (employee != null) {
-            if (updatingEmployee.getName() != null) {
-                employee.setName(updatingEmployee.getName());
-            }
-            if (updatingEmployee.getAge() != null) {
-                employee.setAge(updatingEmployee.getAge());
-            }
-            if (updatingEmployee.getGender() != null) {
-                employee.setGender(updatingEmployee.getGender());
-            }
-            return employeeRepository.save(employee);
+        try {
+            updatingEmployee.setId(employeeId);
+            return employeeRepository.updateIfExist(updatingEmployee);
+        } catch (Exception e) {
+            throw new EmployeeNotFoundException(EMPLOYEE_NOT_FOUND);
         }
-        throw new EmployeeNotFoundException("Employee Id Not Found.");
     }
 
     public List<Employee> getByGender(String gender) {
-        Pageable pageable = PageRequest.of(0, 2);
-        employeeRepository.findAll(pageable);
-
         return employeeRepository.findByGender(gender);
-//        return null;
-//        return employeeRepository.findAllByGender(gender);
     }
 }

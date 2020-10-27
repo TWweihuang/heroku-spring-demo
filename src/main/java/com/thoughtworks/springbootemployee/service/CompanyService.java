@@ -4,21 +4,18 @@ import com.thoughtworks.springbootemployee.exception.CompanyNotFoundException;
 import com.thoughtworks.springbootemployee.model.Company;
 import com.thoughtworks.springbootemployee.model.Employee;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
-import com.thoughtworks.springbootemployee.repository.CompanyRepositoryLegacy;
-import com.thoughtworks.springbootemployee.repository.EmployeeRepositoryLegacy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CompanyService {
+    public static final String COMPANY_NOT_FOUND = "company not found";
     private final CompanyRepository companyRepository;
 
-    public CompanyService(CompanyRepository companyRepository,
-                          EmployeeRepositoryLegacy employeeRepository) {
+    public CompanyService(CompanyRepository companyRepository) {
         this.companyRepository = companyRepository;
     }
 
@@ -39,19 +36,15 @@ public class CompanyService {
     }
 
     public void deleteCompany(Integer companyId) {
-        Optional<Company> company = companyRepository.findById(companyId);
-        company.ifPresent(companyRepository::delete);
+        companyRepository.deleteById(companyId);
     }
 
     public Company update(Integer companyId, Company updatingCompany) {
-        Company company = companyRepository.findById(companyId).orElse(null);
-        if (company != null) {
-            if (updatingCompany.getCompanyName() != null) {
-                company.setCompanyName(updatingCompany.getCompanyName());
-            }
-            return company;
+        try {
+            return companyRepository.updateIfExist(updatingCompany);
+        }catch (Exception e) {
+            throw new CompanyNotFoundException(COMPANY_NOT_FOUND);
         }
-        throw new CompanyNotFoundException("Company Id Not Found.");
     }
 
     public List<Employee> getEmployees(Integer companyId) {
