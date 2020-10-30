@@ -36,7 +36,7 @@ dependencies {
 
 group = 'com.thoughtworks'
 version = '0.0.1-SNAPSHOT'
-description = 'spring-boot-employee'
+description = 'heroku-spring-demo'
 sourceCompatibility = '1.8'
 
 test {
