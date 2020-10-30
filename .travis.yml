@@ -1,0 +1,10 @@
+language: java
+before_script:
+  - ./gradlew assemble
+deploy:
+  provider: heroku
+  api_key:
+    secure: 063a3d4b-54d6-4875-939d-d40453daa339
+  app: my-first-app-for-test-1
+  on:
+    repo: fliuheyan/heroku-spring-demo
