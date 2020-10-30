@@ -22,10 +22,6 @@ jacocoTestReport {
     }
 }
 
-compileJava {
-    options.compilerArgs << '-parameters'
-}
-
 dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.8'
     compileOnly 'org.projectlombok:lombok:1.18.8'
