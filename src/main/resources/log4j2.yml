@@ -1,0 +1,18 @@
+Configuration:
+  name: Default
+
+  Properties:
+    Property:
+      name: log-path
+      value: "logs"
+
+  Appenders:
+    Console:
+      name: Console_Appender
+      target: SYSTEM_OUT
+
+  Loggers:
+    Root:
+      level: info # Important: Don't turn it into debug, otherwise application details will be leaked into logs
+      AppenderRef:
+      - ref: Console_Appender
