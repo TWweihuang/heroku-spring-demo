@@ -1,6 +1,8 @@
 language: java
 before_script:
-  - ./gradlew assemble
+  - ./gradlew test
+jdk:
+  - oraclejdk8
 deploy:
   provider: heroku
   api_key:
