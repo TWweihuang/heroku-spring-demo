@@ -1,15 +1,15 @@
 language: java
-before_script:
-  - ./gradlew test
 dist: trusty
 jdk:
-  - oraclejdk8
+- oraclejdk8
+before_script:
+- "./gradlew test"
 script:
-  - ./gradlew build
+- "./gradlew build"
 deploy:
   provider: heroku
   api_key:
-    secure: 063a3d4b-54d6-4875-939d-d40453daa339
+    secure: DFqQMloA3ycRJWe6X9Ld2MtSKhMo8UBkZk0p3PMxb1kn6XBYwVutSlfh8dcsFyuGbnZKGyd1uYPFZN86Y05ucFhppP9nRV9Td+AIshtxEBr1GOuEVqtiTvjDAQlrnsUtuzSOYJnsEPX1XcI9Sgc1qa/uh+rGwDoGefQFdOIYn8xk0Nm6GINUcJWVzw1Yf8Fy5anjwatROGs8mXxTh9EDgA3Iazuchl+cGMHMTxlSFeiEPaHe+TDLfkAl0E2593Y85VpzUi3HYt2mO1izoRdQDUrsTMFN9vrwuqHxCbi/d3mLq48S45WFcA0IyXNzUB5B4IkzrYOlNXYrAoAbn7BJlR7BPwBKVNKHqcSK3SzFpaI7vtklyZjD9CQ5QwSseF1ADeiQl3gsb8KdYKI9w7EVZD+z4l+5yALx+Hrfi/8qKvyumoqveU/qnPRxSKZAO59KvUmUs1lZy3G04KTl65OQtqXQMiAyqIuqjc4cpLNNNzR1g7w/Dh86gsuibSSYVPAOCpw38vBVsyXn5e3QU4GPtEJlzMXsUGT3ZjT462WTOc37r2oz91lorsSv7bwbfGA0awIqwKzrGR42edFi3TUY7ZqfDhQ5FY2L0a4kffJJ/c9VOzjoQODVqU4j/EQPHHT20CCp3KX6kVkTzoL7814qbOSS6/G5pMZFvh7ZJY8DnME=
   app: my-first-app-for-test-1
   on:
     repo: fliuheyan/heroku-spring-demo
