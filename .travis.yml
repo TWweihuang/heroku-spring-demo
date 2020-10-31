@@ -1,6 +1,7 @@
 language: java
 before_script:
   - ./gradlew test
+dist: trusty
 jdk:
   - oraclejdk8
 deploy:
