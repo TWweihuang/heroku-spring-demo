@@ -1,2 +1,17 @@
 server:
   port: ${PORT:8080}
+spring:
+  datasource:
+#    url: jdbc:postgresql://localhost:5432/postgres
+    driverClassName: org.postgresql.Driver
+    maxActive: 10
+    maxIdle: 5
+    minIdle: 2
+    initialSize: 5
+    removeAbandoned: true
+#    username: postgres
+#    password: test
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none

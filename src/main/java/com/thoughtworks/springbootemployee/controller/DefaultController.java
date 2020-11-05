@@ -13,6 +13,6 @@ public class DefaultController {
     public String defaultPage()
     {
         log.info("calling to DefaultController");
-        return "landing default page";
+        return System.getProperty("spring.profiles.active");
     }
 }
