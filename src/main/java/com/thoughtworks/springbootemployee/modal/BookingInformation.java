@@ -18,7 +18,7 @@ import java.util.Date;
 public class BookingInformation {
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "booking_information_sequence")
-    @SequenceGenerator(name = "booking_information_sequence",sequenceName = "booking_information_sequence")
+    @SequenceGenerator(name = "booking_information_sequence",sequenceName = "booking_information_sequence", allocationSize = 1)
     BigInteger bookingId;
     private String bookingNumber;
     private Integer userId;
